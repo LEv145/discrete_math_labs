@@ -9,17 +9,27 @@ class Node:
         char: str | None = None,
         freq: float = 0,
         left: Node | None = None,
-        right: Node | None = None):
+        right: Node | None = None,
+    ):
         self.char = char
         self.freq = freq
         self.left = left
         self.right = right
 
-    def __lt__(self, other):
-        return self.freq < other.freq
+
+def huffman_encode(text: str, freq_dict: dict[str, int]) -> str:
+    """Кодируем строку по алгоритму Хаффмана."""
+    codes = _compress_by_huffman_codes(freq_dict)
+
+    return "".join(codes[ch] for ch in text if ch in codes)
 
 
-def compress_by_huffman_codes(freq_dict: dict[str, int]) -> dict[str, str]:
+def _compress_by_huffman_codes(freq_dict: dict[str, int]) -> dict[str, str]:
+    """
+    Формируем коды Хаффмана.
+
+    Возвращает словарь {символ: код Хаффмана}.
+    """
     # Строим дерево Хаффмана
     root = _build_huffman_tree(freq_dict)
     # Присваиваем коды
@@ -28,7 +38,7 @@ def compress_by_huffman_codes(freq_dict: dict[str, int]) -> dict[str, str]:
 
 
 def _build_huffman_tree(freq_dict: dict[str, int]) -> Node:
-    """Строит дерево Хаффмана по словарю частот."""
+    """Строим дерево Хаффмана по словарю частот."""
 
     heap = []
     # Создаём узлы для каждого символа и добавляем их в кучу
