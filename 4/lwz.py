@@ -29,10 +29,10 @@ def _compress_by_lzw(input_str: str) -> list[int]:
 
     # Для воспроизводимости упорядочим символы
     unique_chars = sorted(set(input_str))
-    for index, char in enumerate(unique_chars):
-        dictionary[char] = index
+    for nex_index, char in enumerate(unique_chars):
+        dictionary[char] = nex_index
 
-    index = len(dictionary)  # Следующий номер для нового элемента словаря
+    nex_index = len(dictionary)  # Следующий номер для нового элемента словаря
 
     output_codes: list[int] = []
     s = ""  # Текущая обрабатываемая строка
@@ -43,8 +43,8 @@ def _compress_by_lzw(input_str: str) -> list[int]:
             s = s_plus
         else:
             output_codes.append(dictionary[s])
-            dictionary[s_plus] = index
-            index += 1
+            dictionary[s_plus] = nex_index
+            nex_index += 1
             s = c
 
     # Если осталась непустая строка s, выводим её код
