@@ -16,6 +16,9 @@ class Node:
         self.left = left
         self.right = right
 
+    def __lt__(self, other):
+        return self.freq < other.freq
+
 
 def huffman_encode(text: str, freq_dict: dict[str, int]) -> str:
     """Кодируем строку по алгоритму Хаффмана."""
