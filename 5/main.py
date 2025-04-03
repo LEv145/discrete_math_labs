@@ -121,7 +121,7 @@ def find_closest_codeword(distorted_word: int, codewords: List[int]) -> Optional
     return closest
 
 
-def analyze_error_case(original_cw: int, received_word: int, codewords: List[int], t_correct: int):
+def analyze_error_case(original_cw: int, received_word: int, codewords: List[int], t_correct: int, t_detect: int, CODEWORD_LENGTH: int):
     """Анализирует случай ошибки и выводит результаты проверки."""
     is_valid = is_valid_codeword(received_word, codewords)
     closest_cw = find_closest_codeword(received_word, codewords)
@@ -201,7 +201,7 @@ def main() -> None:
     print(f"Исходное сообщение: {int_to_binary_string(m_example, MESSAGE_LENGTH)}")
     print(f"Кодовое слово:      {int_to_binary_string(cw_example, CODEWORD_LENGTH)}")
     print(f"Вектор ошибки:      {int_to_binary_string(error_vector_2, CODEWORD_LENGTH)}")
-    analyze_error_case(cw_example, received_word_2, all_codewords, t_correct)
+    analyze_error_case(cw_example, received_word_2, all_codewords, t_correct, t_detect, CODEWORD_LENGTH)
 
     # Пример 2: Ошибка весом 4 (обнаруживается, но не исправляется)
     error_vector_4 = int("11110000000000000000000", 2)  # Первые 4 бита
@@ -211,7 +211,7 @@ def main() -> None:
     print(f"Исходное сообщение: {int_to_binary_string(m_example, MESSAGE_LENGTH)}")
     print(f"Кодовое слово:      {int_to_binary_string(cw_example, CODEWORD_LENGTH)}")
     print(f"Вектор ошибки:      {int_to_binary_string(error_vector_4, CODEWORD_LENGTH)}")
-    analyze_error_case(cw_example, received_word_4, all_codewords, t_correct)
+    analyze_error_case(cw_example, received_word_4, all_codewords, t_correct, t_detect, CODEWORD_LENGTH)
 
     # Пример 3: Ошибка весом 7 (превышает обнаруживающую способность)
     error_vector_7 = int("11111110000000000000000", 2)  # Первые 7 бит
@@ -221,7 +221,7 @@ def main() -> None:
     print(f"Исходное сообщение: {int_to_binary_string(m_example, MESSAGE_LENGTH)}")
     print(f"Кодовое слово:      {int_to_binary_string(cw_example, CODEWORD_LENGTH)}")
     print(f"Вектор ошибки:      {int_to_binary_string(error_vector_7, CODEWORD_LENGTH)}")
-    analyze_error_case(cw_example, received_word_7, all_codewords, t_correct)
+    analyze_error_case(cw_example, received_word_7, all_codewords, t_correct, t_detect, CODEWORD_LENGTH)
 
 
 if __name__ == "__main__":
