@@ -156,7 +156,7 @@ def draw_graph_with_cut(graph, A, B, source, sink):
 
     # Подписи рёбер: поток/пропускная способность
     edge_labels = {
-        (u, v): f"{graph[u][v]["flow"]} ({graph[u][v]["capacity"]})"
+        (u, v): f"({graph[u][v]["capacity"]})"
         for u, v in graph.edges
     }
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels, font_color="blue")
@@ -168,6 +168,15 @@ def main() -> None:
     random.seed(42)
 
     edges_list = [
+        [
+            ("A", "p", 7), ("A", "d", 5), ("A", "a", 3),
+            ("a", "d", 2), ("a", "k", 1), ("a", "b", 6),
+            ("b", "C", 5),
+            ("c", "b", 1), ("c", "C", 4),
+            ("d", "k", 2), ("d", "c", 6),
+            ("p", "k", 2), ("p", "b", 3),
+            ("k", "C", 6),
+        ],
         [
             ("A", "B", 5), ("A", "C", 9), ("A", "I", 4),
             ("B", "I", 6), ("B", "C", 6), ("B", "G", 6),
